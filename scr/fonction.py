@@ -64,3 +64,16 @@ def effectif_freq(dataset, column_name):
     })
     
     return result_df
+
+
+
+### Calcul des atux d retentions 
+def conversion(df,columns_names):
+
+    retained = df[df['is_retained']==True].groupby(columns_names)['user_id'].nunique()
+    convert = df[df['converted']==True].groupby(columns_names)['user_id'].nunique()
+    
+    retention_rate = retained/convert
+
+    print(" Les taux de retention suivant le",columns_names," sont:")
+    return retention_rate
